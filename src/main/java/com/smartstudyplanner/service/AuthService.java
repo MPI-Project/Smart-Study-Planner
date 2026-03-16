@@ -24,6 +24,16 @@ public class AuthService {
 
         return userRepository.save(user);
     }
+    public User logIn(String email, String password) throws Exception {
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new Exception("Utilizator negăsit!"));
 
+        // VERIFICARE: Nu putem folosi .equals() pentru că parola din DB e criptată
+        if (!passwordEncoder.matches(password, user.getPassword())) {
+            throw new Exception("Parolă incorectă!");
+        }
+
+        return user;
+    }
 
 }

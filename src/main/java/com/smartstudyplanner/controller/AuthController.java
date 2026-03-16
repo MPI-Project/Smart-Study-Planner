@@ -1,5 +1,7 @@
 package com.smartstudyplanner.controller;
 
+
+import com.smartstudyplanner.dto.LoginRequest;
 import com.smartstudyplanner.entity.User;
 import com.smartstudyplanner.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,5 +22,13 @@ public class AuthController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
+    @PostMapping("/login")
+    public ResponseEntity<?> logIn(@RequestBody LoginRequest request) { // Folosești LoginRequest
+        try {
+            return ResponseEntity.ok(authService.logIn(request.getEmail(), request.getPassword()));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(e.getMessage());
+        }
+    }
+    }
 
-}

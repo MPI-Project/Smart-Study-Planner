@@ -31,4 +31,12 @@ public class SubjectController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
+    @PutMapping("/{id}")
+    public ResponseEntity<?> update(@PathVariable Long id, @RequestBody Subject subject) {
+        try {
+            return ResponseEntity.ok(subjectService.update(id, subject));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
 }

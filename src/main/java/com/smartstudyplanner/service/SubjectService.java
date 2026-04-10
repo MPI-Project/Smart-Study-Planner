@@ -22,5 +22,12 @@ public class SubjectService {
         subject.setUser(user);
         return subjectRepository.save(subject);
     }
+    public List<Subject> getAll() {
+        return subjectRepository.findAll();
+    }
 
+    public Subject getById(Long id) throws Exception {
+        return subjectRepository.findById(id)
+                .orElseThrow(() -> new Exception("Materia nu există!"));
+    }
 }

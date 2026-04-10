@@ -18,4 +18,17 @@ public class SubjectController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
+    @GetMapping
+    public ResponseEntity<?> getAll() {
+        return ResponseEntity.ok(subjectService.getAll());
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getById(@PathVariable Long id) {
+        try {
+            return ResponseEntity.ok(subjectService.getById(id));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
 }

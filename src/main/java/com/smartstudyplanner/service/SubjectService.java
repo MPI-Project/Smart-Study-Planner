@@ -42,4 +42,8 @@ public class SubjectService {
 
         return subjectRepository.save(existing);
     }
+    public void delete(Long id) throws Exception {
+        Subject existing = getById(id);
+        subjectRepository.delete(existing);
+    }
 }

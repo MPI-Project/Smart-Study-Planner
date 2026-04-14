@@ -30,4 +30,16 @@ public class SubjectService {
         return subjectRepository.findById(id)
                 .orElseThrow(() -> new Exception("Materia nu există!"));
     }
+    public Subject update(Long id, Subject updatedSubject) throws Exception {
+        validator.validate(updatedSubject);
+        Subject existing = getById(id);
+
+        existing.setName(updatedSubject.getName());
+        existing.setStartDate(updatedSubject.getStartDate());
+        existing.setDeadline(updatedSubject.getDeadline());
+        existing.setRequiredHours(updatedSubject.getRequiredHours());
+        existing.setCompletedHours(updatedSubject.getCompletedHours());
+
+        return subjectRepository.save(existing);
+    }
 }
